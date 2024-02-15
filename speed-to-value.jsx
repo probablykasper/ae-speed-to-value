@@ -46,7 +46,7 @@ function run() {
   var lastWritten = Date.now();
   writeStatus(i + 1, totalFrames);
   for (var time = secondFrame; time < comp.workAreaDuration; time += comp.frameDuration) {
-    if (lastWritten + 500 < Date.now()) {
+    if (Date.now() > lastWritten + 500) {
       writeStatus(i + 1, totalFrames);
       lastWritten = Date.now();
     }
