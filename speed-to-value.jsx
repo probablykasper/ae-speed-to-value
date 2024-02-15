@@ -36,6 +36,10 @@ function run() {
   if (typeof property.value !== 'number') {
     return alert('Select a numeric property');
   }
+  var propertyName = property.name;
+  if (property.matchName === 'ADBE Slider Control-0001') {
+    propertyName = property.parentProperty.name;
+  }
 
   var times = [comp.workAreaStart];
   var values = [0];
@@ -67,12 +71,11 @@ function run() {
   app.beginUndoGroup("Add Accumulated Property");
   var effectsProperty = layer.property('ADBE Effect Parade');
   var slider = effectsProperty.addProperty('ADBE Slider Control');
-  slider.name = "Accumulated Value";
+  slider.name = propertyName + " Accumulated";
   var sliderProperty = slider.property("ADBE Slider Control-0001");
   sliderProperty.setValuesAtTimes(times, values);
   app.endUndoGroup();
   clearOutput();
-  // property.name
 
 }
 run();
